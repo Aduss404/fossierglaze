@@ -1,4 +1,9 @@
-# FOSSGlaze
+# FOSSIERGlaze
+
+*Fork with extra distros and niri setup in fossierglaze --setup tiling. Feel free to issue any distro you'd like me to add or fork this fork (or the original source) to do so and tinker a bit more with the program. :3*
+*Shoutout to szoltysek for making this awesome larpmaxxing package. 🫶*
+
+***
 
 ### Why just use Linux when you can rub it in everyone's face on Discord?
 

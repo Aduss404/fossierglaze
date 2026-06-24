@@ -9,14 +9,17 @@ from pathlib import Path
 from pypresence import Presence, ActivityType
 from pypresence.exceptions import InvalidID, DiscordNotFound
 
-VERSION = "v1.0" 
+VERSION = "v1.1"
 
 # change this only after you fork the repo, pleaseeeeeeeeeeee :C
-CLIENT_ID = '1432701582541193236' 
+## Okay! :3
+CLIENT_ID = '1517185175635886231'
 
 LOGO_MAP = {
     'default': 'tux_logo',
     'arch': 'arch_logo',
+    'artix': 'artix_logo'
+    'cachyos': 'cachyos_logo'
     'omarchy': 'omarchy',
     'debian': 'debian_logo',
     'fedora': 'fedora_logo',
@@ -31,28 +34,30 @@ LOGO_MAP = {
 }
 
 SETUP_TILING_INSTRUCTIONS = """
-[FOSSGlaze Setup: Automatic startup for saucy DE's and WM's]
+[FOSSIERGlaze Setup: Automatic startup for saucy DE's and WM's]
 
-Why wouldn't you want to use this? It's a laziest way to start FOSSGlaze.
-Add these lines to your config file to automatically start FOSSGlaze at login:
+Why wouldn't you want to use this? It's a laziest way to start FOSSIERGlaze.
+Add these lines to your config file to automatically start FOSSIERGlaze at login:
 
   For i3 or Sway (e.g., ~/.config/i3/config):
-    exec --no-startup-id /usr/bin/fossglaze
+    exec --no-startup-id /usr/bin/fossierglaze
 
   For Hyprland (e.g., ~/.config/hypr/hyprland.conf):
-    exec-once = /usr/bin/fossglaze
+    exec-once = /usr/bin/fossierglaze.
 
-After adding the line, save the file and reload your WM (optional, ain't
-forcing you to do shi)
+  For Niri (e.g. ~/.config/niri/config.kdl)
+    spawn-at-startup "fossierglaze"
+
+After adding the line, save the file and reload your WM (optional, ain't forcing you to do shi)
 """
 
 SYSTEMD_SERVICE_CONTENT = """[Unit]
-Description=FOSSGlaze Discord RPC
+Description=FOSSIERGlaze Discord RPC
 After=graphical-session.target
 PartOf=graphical-session.target
 
 [Service]
-ExecStart=/usr/bin/fossglaze
+ExecStart=/usr/bin/fossierglaze
 Restart=always
 RestartSec=10
 
@@ -126,16 +131,16 @@ def get_auto_distro_details():
     return pretty_name, state_msg, logo_key
 
 def print_error(msg):
-    print(f"FOSSGlaze Error: {msg}", file=sys.stderr)
+    print(f"FOSSIERGlaze Error: {msg}", file=sys.stderr)
 
 def setup_systemd():
-    print("[FOSSGlaze Setup: systemd User Service (secure :3)]")
+    print("[FOSSIERGlaze Setup: systemd User Service (secure :3)]")
     print("")
     print("This will probably create a service file in your home directory to run")
-    print("FOSSGlaze automatically when you log in.")
+    print("FOSSIERGlaze automatically when you log in.")
     
     try:
-        choice = input("Install FOSSGlaze as a systemd user service? (y/n): ").strip().lower()
+        choice = input("Install FOSSIERGlaze as a systemd user service? (y/n): ").strip().lower()
     except KeyboardInterrupt:
         print("\nSetup cancelled - why would you do this.")
         return
@@ -146,7 +151,7 @@ def setup_systemd():
 
     try:
         service_dir = Path.home() / ".config/systemd/user"
-        service_path = service_dir / "fossglaze.service"
+        service_path = service_dir / "fossierglaze.service"
 
         print(f"Creating directory: {service_dir}")
         service_dir.mkdir(parents=True, exist_ok=True)
@@ -158,31 +163,31 @@ def setup_systemd():
         subprocess.run(["systemctl", "--user", "daemon-reload"], check=True)
         
         print("Enabling and starting the service...")
-        subprocess.run(["systemctl", "--user", "enable", "--now", "fossglaze.service"], check=True)
+        subprocess.run(["systemctl", "--user", "enable", "--now", "fossierglaze.service"], check=True)
         
         print("\n[SUCCESS!]")
-        print("FOSSGlaze is now installed and running automatically on login.")
+        print("FOSSIERGlaze is now installed and running automatically on login.")
         print("To check its status, run:")
-        print("  systemctl --user status fossglaze.service")
+        print("  systemctl --user status fossierglaze.service")
 
     except subprocess.CalledProcessError as e:
         print_error(f"A systemctl command failed: {e}")
         print("Please try running the commands in the instructions manually.")
     except Exception as e:
         print_error(f"An unexpected error occurred: {e}")
-        print("Setup failed. Please report this bug in FOSSGlaze's GitHub repo. Probably gonna fix it soon...")
+        print("Setup failed. Please report this bug in FOSSIERGlaze's GitHub repo. Probably gonna fix it soon...")
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="FOSSGlaze: A Discord RPC for your Linux Distro.",
+        description="FOSSIERGlaze: A Discord RPC for your Linux Distro.",
         formatter_class=argparse.RawTextHelpFormatter
     )
     
     parser.add_argument(
         '-v', '--version',
         action='version',
-        version=f"FOSSGlaze {VERSION}",
+        version=f"FOSSIERGlaze {VERSION}",
         help="Show the application's version and exit (i'm not gonna lie, this is kinda useless)"
     )
     parser.add_argument(
@@ -193,7 +198,7 @@ def main():
     parser.add_argument(
         '--setup',
         choices=['tiling', 'systemd'],
-        help="Run the interactive setup for auto-starting FOSSGlaze"
+        help="Run the interactive setup for auto-starting FOSSIERGlaze"
     )
 
     parser.add_argument(
@@ -228,7 +233,7 @@ def main():
     
     try:
         if args.distro:
-            print(f"FOSSGlaze: User forced distro: '{args.distro}'")
+            print(f"FOSSIERGlaze: User forced distro: '{args.distro}'")
             forced_id = args.distro.lower()
             
             if forced_id in LOGO_MAP:
@@ -248,12 +253,12 @@ def main():
                 state_msg = "i use linux just in case"
 
         else:
-            print("FOSSGlaze: Starting. Auto-detecting distro...")
+            print("FOSSIERGlaze: Starting. Auto-detecting distro...")
             distro_name, state_msg, logo_key = get_auto_distro_details()
 
-        print(f"FOSSGlaze: Distro set to: {distro_name}.")
-        print(f"FOSSGlaze: Status will be: '{state_msg}'")
-        print(f"FOSSGlaze: Using logo asset '{logo_key}'.")
+        print(f"FOSSIERGlaze: Distro set to: {distro_name}.")
+        print(f"FOSSIERGlaze: Status will be: '{state_msg}'")
+        print(f"FOSSIERGlaze: Using logo asset '{logo_key}'.")
 
     except Exception as e:
         print_error(f"Failed to initialize: {e}")
@@ -266,7 +271,7 @@ def main():
             
             RPC.connect()
             connected = True
-            print("FOSSGlaze: Successfully connected to Discord.")
+            print("FOSSIERGlaze: Successfully connected to Discord.")
 
             presence_data = {
                 "activity_type": ActivityType.WATCHING,
@@ -278,7 +283,7 @@ def main():
             }
             
             RPC.update(**presence_data)
-            print("FOSSGlaze: Status is now live!")
+            print("FOSSIERGlaze: Status is now live!")
             
             while True:
                 time.sleep(300) 
@@ -289,7 +294,7 @@ def main():
         except (ConnectionRefusedError, DiscordNotFound):
             print_error("Could not connect to Discord.")
             print_error("Is your Discord desktop client open? (Try Discord Canary)")
-            print("FOSSGlaze: Retrying in 60 seconds...")
+            print("FOSSIERGlaze: Retrying in 60 seconds...")
             connected = False 
             if RPC:
                 try:
@@ -299,7 +304,7 @@ def main():
                 RPC = None
             time.sleep(60)
         except KeyboardInterrupt:
-            print("\nFOSSGlaze: Exiting...")
+            print("\nFOSSIERGlaze: Exiting...")
             if connected and RPC:
                 RPC.close()
             break
@@ -309,7 +314,7 @@ def main():
                 RPC.close()
             connected = False
             RPC = None
-            print("FOSSGlaze: Retrying in 60 seconds...")
+            print("FOSSIERGlaze: Retrying in 60 seconds...")
             time.sleep(60)
 
 if __name__ == "__main__":

@@ -1,30 +1,31 @@
 # Maintainer: szoltysek <karolszoltysek.ti@gmail.com>
+# Fork by: Aduss404
 
-pkgname=fossglaze-git
-pkgver=1.0.r3.g016d029
+pkgname=fossierglaze-git
+pkgver=1.1.r3.g016d029
 pkgrel=1
-pkgdesc="Rub your Linux distro into every Discord user's face via Discord RPC"
+pkgdesc="Rub your Linux distro into every Discord user's face via Discord RPC with extended compatibility."
 arch=('any')
-url="https://github.com/szoltysek/fossglaze"
+url="https://github.com/Aduss404/fossierglaze/"
 license=('GPL3')
 depends=('python' 'python-pypresence')
 makedepends=('git')
-provides=('fossglaze')
-conflicts=('fossglaze')
+provides=('fossierglaze')
+conflicts=('fossierglaze')
 source=("git+${url}#branch=main")
 sha256sums=('SKIP')
 
 pkgver() {
-  cd "$srcdir/fossglaze"
+  cd "$srcdir/fossierglaze"
   # Generate version string like: 1.0.rXX.gabcdef
-  printf "1.0.r%s.g%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  printf "1.1.r%s.g%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 }
 
 package() {
-  cd "$srcdir/fossglaze"
+  cd "$srcdir/fossierglaze"
 
   # Install the Python script as an executable
-  install -Dm755 fossglaze.py "$pkgdir/usr/bin/fossglaze"
+  install -Dm755 fossierglaze.py "$pkgdir/usr/bin/fossierglaze"
 
   # Install documentation and license
   install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
