@@ -18,8 +18,8 @@ CLIENT_ID = '1517185175635886231'
 LOGO_MAP = {
     'default': 'tux_logo',
     'arch': 'arch_logo',
-    'artix': 'artix_logo'
-    'cachyos': 'cachyos_logo'
+    'artix': 'artix_logo',
+    'cachyos': 'cachyos_logo',
     'omarchy': 'omarchy',
     'debian': 'debian_logo',
     'fedora': 'fedora_logo',
