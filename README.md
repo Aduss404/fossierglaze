@@ -25,11 +25,7 @@ All of your Discord friends need to know that you are currently on a Linux syste
 - Tiling WM Support: fossierglaze --setup tiling will print the exact exec-once lines for your "saucy" Hyprland, i3, *or niri* config.
 
 ### Installation
-This is on the ***AUR*** yet, because of course it is. 
-https://aur.archlinux.org/packages/fossierglaze-git
-
-Guide (you should know this y'know?):
-`yay -S fossierglaze`
+*This is* ***not*** *on the* ***AUR*** *yet, registration is currently disabled.*
 
 If you're not on an Arch-based distro, I don't know what to tell you. Clone the repo, install python-pypresence (`pip3 install pypresence`), and run python3 fossierglaze.py.
 
@@ -65,7 +61,7 @@ It will now work. Also, make sure "Activity Status" is enabled in your Discord U
 
 ### Forking & Adding Your Own Distro
 
-Want to add your special distro that only you and 3 other people use? Fork this repo and create your own Discord application. Just kidding, I can implement all of the ***good*** distros but I ain't gonna implement infinite count of niche shi. Open an issue if you have one (probably skill issue).
+*Want to add your special distro that only you and 3 other people use? Request it under an issue or fork this repo (or the original repo) and create your own Discord application.* 
 
 ### License
 GPL-3.0. Go nuts. Do whatever you want I guess.
