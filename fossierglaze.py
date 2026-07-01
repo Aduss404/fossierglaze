@@ -115,6 +115,10 @@ def get_auto_distro_details():
             pretty_name = "Arch Linux"
     else:
         state_msg = "i use linux just in case"
+        
+    if distro_id == 'artix':
+        state_msg = "i use artix btw"
+        pretty_name = "Artix Linux"
 
     if distro_id in LOGO_MAP:
         logo_key = LOGO_MAP[distro_id]

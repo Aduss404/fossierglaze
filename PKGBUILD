@@ -2,7 +2,7 @@
 # Fork by: Aduss404
 
 pkgname=fossierglaze-git
-pkgver=1.1.r8.g5909461
+pkgver=1.1.r1.g29b0750
 pkgrel=1
 pkgdesc="Rub your Linux distro into every Discord user's face via Discord RPC with extended compatibility."
 arch=('any')
